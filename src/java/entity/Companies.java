@@ -6,20 +6,17 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Companies.findByCodCompany", query = "SELECT c FROM Companies c WHERE c.codCompany = :codCompany"),
     @NamedQuery(name = "Companies.findByMame", query = "SELECT c FROM Companies c WHERE c.mame = :mame"),
     @NamedQuery(name = "Companies.findByWebpage", query = "SELECT c FROM Companies c WHERE c.webpage = :webpage"),
+    @NamedQuery(name = "Companies.findByDirecction", query = "SELECT c FROM Companies c WHERE c.direcction = :direcction"),
+    @NamedQuery(name = "Companies.findByTechnologies", query = "SELECT c FROM Companies c WHERE c.technologies = :technologies"),
     @NamedQuery(name = "Companies.findByRating", query = "SELECT c FROM Companies c WHERE c.rating = :rating")})
 public class Companies implements Serializable {
 
@@ -42,38 +41,20 @@ public class Companies implements Serializable {
     @Basic(optional = false)
     @Column(name = "codCompany")
     private Integer codCompany;
-    @Size(max = 100)
+    @Size(max = 200)
     @Column(name = "mame")
     private String mame;
     @Size(max = 200)
     @Column(name = "webpage")
     private String webpage;
+    @Size(max = 300)
+    @Column(name = "direcction")
+    private String direcction;
+    @Size(max = 200)
+    @Column(name = "technologies")
+    private String technologies;
     @Column(name = "rating")
     private Integer rating;
-
-        /*This makes the join table(the relation table between worktype and companies*/
-    @ManyToMany
-    private Collection<WorkTypes> workTypes;
-    @ManyToMany
-    private Collection<Places> workPlaces;
-
-    @XmlTransient
-    public Collection<WorkTypes> getWorkTypes() {
-        return workTypes;
-    }
-
-    public void setWorkTypes(Collection<WorkTypes> workTypes) {
-        this.workTypes = workTypes;
-    }
-
-    @XmlTransient
-    public Collection<Places> getWorkPlaces() {
-        return workPlaces;
-    }
-
-    public void setWorkPlaces(Collection<Places> workPlaces) {
-        this.workPlaces = workPlaces;
-    }
 
     public Companies() {
     }
@@ -104,6 +85,22 @@ public class Companies implements Serializable {
 
     public void setWebpage(String webpage) {
         this.webpage = webpage;
+    }
+
+    public String getDirecction() {
+        return direcction;
+    }
+
+    public void setDirecction(String direcction) {
+        this.direcction = direcction;
+    }
+
+    public String getTechnologies() {
+        return technologies;
+    }
+
+    public void setTechnologies(String technologies) {
+        this.technologies = technologies;
     }
 
     public Integer getRating() {

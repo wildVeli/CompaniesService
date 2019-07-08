@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("entity.companies")
 public class CompaniesFacadeREST extends AbstractFacade<Companies> {
 
-    @PersistenceContext(unitName = "CompaniesService2PU")
+    @PersistenceContext(unitName = "testPU")
     private EntityManager em;
 
     public CompaniesFacadeREST() {
